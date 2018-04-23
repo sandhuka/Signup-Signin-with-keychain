@@ -15,9 +15,11 @@
 		9D16C8D3208A9A1C00E98314 /* AppLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16C8D2208A9A1C00E98314 /* AppLaunchViewController.swift */; };
 		9D16C8D5208A9A5000E98314 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16C8D4208A9A5000E98314 /* LoginViewController.swift */; };
 		9D16C8D7208AA5D400E98314 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D16C8D6208AA5D400E98314 /* HomeScreenViewController.swift */; };
+		A3FEE1A211C145B90C83333B /* Pods_SignUp_SIgnIn_with_Keychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8232FAAF8F16BE23FC5AC2F /* Pods_SignUp_SIgnIn_with_Keychain.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D4C7CD90A1FC38134CFE0A1 /* Pods-SignUp SIgnIn with Keychain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignUp SIgnIn with Keychain.release.xcconfig"; path = "Pods/Target Support Files/Pods-SignUp SIgnIn with Keychain/Pods-SignUp SIgnIn with Keychain.release.xcconfig"; sourceTree = "<group>"; };
 		9D16C8BB208A909200E98314 /* SignUp SIgnIn with Keychain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SignUp SIgnIn with Keychain.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D16C8BE208A909200E98314 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D16C8C3208A909200E98314 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -28,6 +30,8 @@
 		9D16C8D2208A9A1C00E98314 /* AppLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchViewController.swift; sourceTree = "<group>"; };
 		9D16C8D4208A9A5000E98314 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9D16C8D6208AA5D400E98314 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		B18ECB8849E6EF6151B26CEA /* Pods-SignUp SIgnIn with Keychain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignUp SIgnIn with Keychain.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SignUp SIgnIn with Keychain/Pods-SignUp SIgnIn with Keychain.debug.xcconfig"; sourceTree = "<group>"; };
+		D8232FAAF8F16BE23FC5AC2F /* Pods_SignUp_SIgnIn_with_Keychain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignUp_SIgnIn_with_Keychain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +39,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3FEE1A211C145B90C83333B /* Pods_SignUp_SIgnIn_with_Keychain.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B55EB7B926268C71049641C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B18ECB8849E6EF6151B26CEA /* Pods-SignUp SIgnIn with Keychain.debug.xcconfig */,
+				2D4C7CD90A1FC38134CFE0A1 /* Pods-SignUp SIgnIn with Keychain.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		9D16C8B2208A909100E98314 = {
 			isa = PBXGroup;
 			children = (
 				9D16C8BD208A909200E98314 /* signUpJSONtry */,
 				9D16C8BC208A909200E98314 /* Products */,
+				9B55EB7B926268C71049641C /* Pods */,
+				AD1E2BF750D0DAB962177814 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +89,14 @@
 			path = signUpJSONtry;
 			sourceTree = "<group>";
 		};
+		AD1E2BF750D0DAB962177814 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8232FAAF8F16BE23FC5AC2F /* Pods_SignUp_SIgnIn_with_Keychain.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -80,9 +104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D16C8CD208A909300E98314 /* Build configuration list for PBXNativeTarget "SignUp SIgnIn with Keychain" */;
 			buildPhases = (
+				CCF762AEEEBB1B685A36A985 /* [CP] Check Pods Manifest.lock */,
 				9D16C8B7208A909100E98314 /* Sources */,
 				9D16C8B8208A909100E98314 /* Frameworks */,
 				9D16C8B9208A909100E98314 /* Resources */,
+				14D99D1A2B77DDEFAD682243 /* [CP] Embed Pods Frameworks */,
+				7503B2CC8DA819932469903F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -138,6 +165,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14D99D1A2B77DDEFAD682243 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SignUp SIgnIn with Keychain/Pods-SignUp SIgnIn with Keychain-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SignUp SIgnIn with Keychain/Pods-SignUp SIgnIn with Keychain-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7503B2CC8DA819932469903F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SignUp SIgnIn with Keychain/Pods-SignUp SIgnIn with Keychain-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CCF762AEEEBB1B685A36A985 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SignUp SIgnIn with Keychain-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9D16C8B7208A909100E98314 /* Sources */ = {
@@ -290,15 +371,13 @@
 		};
 		9D16C8CE208A909300E98314 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B18ECB8849E6EF6151B26CEA /* Pods-SignUp SIgnIn with Keychain.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TT787LYYEJ;
 				INFOPLIST_FILE = signUpJSONtry/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanwar.signUpJSONtry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -308,15 +387,13 @@
 		};
 		9D16C8CF208A909300E98314 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D4C7CD90A1FC38134CFE0A1 /* Pods-SignUp SIgnIn with Keychain.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TT787LYYEJ;
 				INFOPLIST_FILE = signUpJSONtry/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanwar.signUpJSONtry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

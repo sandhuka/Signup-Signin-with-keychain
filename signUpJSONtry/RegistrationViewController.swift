@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SVProgressHUD
+
 
 class RegistrationViewController: UIViewController {
 
@@ -30,6 +32,7 @@ class RegistrationViewController: UIViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     @IBAction func SignUpAcceptTermsButtonPressed(_ sender: Any) {
         
@@ -49,6 +52,60 @@ class RegistrationViewController: UIViewController {
             displayMessage(userMessage: "Passwords should match")
             return
         }
+        SVProgressHUD.show()
+        
+        let myURL = URL(string: "http://localhost:8080/signup")
+        var request = URLRequest(url: myURL!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "content-type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let postString = ["firstname": firstNameTextField.text!, "lastname": lastNameTextField.text!, "emailid": emailIdTextField.text!, "password": passwordTextField.text!, "phoneno": phoneNumberTextField.text!] as [String: String]
+        
+        do{
+            request.httpBody = try JSONSerialization.data(withJSONObject: postString, options: .prettyPrinted)
+        } catch let error{
+            print(error.localizedDescription)
+            displayMessage(userMessage: "Something went wrong")
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            
+          SVProgressHUD.dismiss()
+            if error != nil {
+                self.displayMessage(userMessage: "could not perform request. Please try later")
+                print("error = \(String(describing: error))")
+                return
+        }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<String, String>
+                
+                if let parseJSON = json {
+                    let userId = parseJSON["userid"] as String?
+                    print("User ID: \(String(describing: userId!))")
+//                    let message = parseJSON["code"] as String?
+//                    print("Code : \(String(describing: message))")
+                    
+                    if (userId?.isEmpty)!{
+                    self.displayMessage(userMessage: "user id empty")
+                        return
+//                    }else if (message == "200") {
+//                        self.displayMessage(userMessage: "user registered successfully")
+//                        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreenViewController") as! HomeScreenViewController
+//                        self.present(homeVC, animated: true)
+                        
+                    }
+                }else {
+                    self.displayMessage(userMessage: "Could not register. try again later")
+                }
+                
+            } catch{
+                SVProgressHUD.dismiss()
+                self.displayMessage(userMessage: "Could not register. try again later")
+                
+            }
+    }
+        task.resume()
         
         
         
