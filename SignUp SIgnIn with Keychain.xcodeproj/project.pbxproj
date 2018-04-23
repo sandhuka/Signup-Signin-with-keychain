@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9D16C8BB208A909200E98314 /* signUpJSONtry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = signUpJSONtry.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D16C8BB208A909200E98314 /* SignUp SIgnIn with Keychain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SignUp SIgnIn with Keychain.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D16C8BE208A909200E98314 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D16C8C3208A909200E98314 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9D16C8C5208A909300E98314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		9D16C8BC208A909200E98314 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9D16C8BB208A909200E98314 /* signUpJSONtry.app */,
+				9D16C8BB208A909200E98314 /* SignUp SIgnIn with Keychain.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,9 +76,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9D16C8BA208A909100E98314 /* signUpJSONtry */ = {
+		9D16C8BA208A909100E98314 /* SignUp SIgnIn with Keychain */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9D16C8CD208A909300E98314 /* Build configuration list for PBXNativeTarget "signUpJSONtry" */;
+			buildConfigurationList = 9D16C8CD208A909300E98314 /* Build configuration list for PBXNativeTarget "SignUp SIgnIn with Keychain" */;
 			buildPhases = (
 				9D16C8B7208A909100E98314 /* Sources */,
 				9D16C8B8208A909100E98314 /* Frameworks */,
@@ -88,9 +88,9 @@
 			);
 			dependencies = (
 			);
-			name = signUpJSONtry;
+			name = "SignUp SIgnIn with Keychain";
 			productName = signUpJSONtry;
-			productReference = 9D16C8BB208A909200E98314 /* signUpJSONtry.app */;
+			productReference = 9D16C8BB208A909200E98314 /* SignUp SIgnIn with Keychain.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -108,7 +108,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9D16C8B6208A909100E98314 /* Build configuration list for PBXProject "signUpJSONtry" */;
+			buildConfigurationList = 9D16C8B6208A909100E98314 /* Build configuration list for PBXProject "SignUp SIgnIn with Keychain" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -121,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9D16C8BA208A909100E98314 /* signUpJSONtry */,
+				9D16C8BA208A909100E98314 /* SignUp SIgnIn with Keychain */,
 			);
 		};
 /* End PBXProject section */
@@ -327,7 +327,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9D16C8B6208A909100E98314 /* Build configuration list for PBXProject "signUpJSONtry" */ = {
+		9D16C8B6208A909100E98314 /* Build configuration list for PBXProject "SignUp SIgnIn with Keychain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D16C8CB208A909300E98314 /* Debug */,
@@ -336,7 +336,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9D16C8CD208A909300E98314 /* Build configuration list for PBXNativeTarget "signUpJSONtry" */ = {
+		9D16C8CD208A909300E98314 /* Build configuration list for PBXNativeTarget "SignUp SIgnIn with Keychain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D16C8CE208A909300E98314 /* Debug */,

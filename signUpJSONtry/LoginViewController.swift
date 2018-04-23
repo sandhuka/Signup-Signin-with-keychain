@@ -10,11 +10,13 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var loginScreenLabel: UILabel!
     @IBOutlet weak var emailIdTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        loginScreenLabel.layer.masksToBounds = true
+        loginScreenLabel.layer.cornerRadius = 7
         // Do any additional setup after loading the view.
     }
 
