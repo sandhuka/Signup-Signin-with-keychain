@@ -24,8 +24,21 @@ class RegistrationViewController: UIViewController {
         registrationScreenLabel.layer.masksToBounds = true
         registrationScreenLabel.layer.cornerRadius = 7
         // Do any additional setup after loading the view.
+        
+        setupNavigationBar()
     }
 
+    
+    //MARK:- Setup navigation bar
+    func setupNavigationBar() {
+        
+        self.navigationItem.title = "Registration"
+        
+      //  self.navigationItem.hidesBackButton = true
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -53,61 +66,78 @@ class RegistrationViewController: UIViewController {
             return
         }
         SVProgressHUD.show()
-        
-        let myURL = URL(string: "http://localhost:8080/signup")
+
+        let myURL = URL(string: "http://192.168.7.92:8080/signup")
         var request = URLRequest(url: myURL!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "content-type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        let postString = ["firstname": firstNameTextField.text!, "lastname": lastNameTextField.text!, "emailid": emailIdTextField.text!, "password": passwordTextField.text!, "phoneno": phoneNumberTextField.text!] as [String: String]
-        
+
+        let postParam = ["firstname": firstNameTextField.text!, "lastname": lastNameTextField.text!, "emailid": emailIdTextField.text!, "password": passwordTextField.text!, "phoneno": phoneNumberTextField.text!] as [String: String]
+
         do{
-            request.httpBody = try JSONSerialization.data(withJSONObject: postString, options: .prettyPrinted)
+            request.httpBody = try JSONSerialization.data(withJSONObject: postParam, options: .prettyPrinted)
         } catch let error{
             print(error.localizedDescription)
             displayMessage(userMessage: "Something went wrong")
             return
         }
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+
             
-          SVProgressHUD.dismiss()
-            if error != nil {
-                self.displayMessage(userMessage: "could not perform request. Please try later")
-                print("error = \(String(describing: error))")
-                return
-        }
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<String, String>
+            DispatchQueue.main.async {
                 
-                if let parseJSON = json {
-                    let userId = parseJSON["userid"] as String?
-                    print("User ID: \(String(describing: userId!))")
-//                    let message = parseJSON["code"] as String?
-//                    print("Code : \(String(describing: message))")
-                    
-                    if (userId?.isEmpty)!{
-                    self.displayMessage(userMessage: "user id empty")
-                        return
-//                    }else if (message == "200") {
-//                        self.displayMessage(userMessage: "user registered successfully")
-//                        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreenViewController") as! HomeScreenViewController
-//                        self.present(homeVC, animated: true)
+                SVProgressHUD.dismiss()
+                if error != nil {
+                    self.displayMessage(userMessage: "could not perform request. Please try later")
+                    print("error = \(String(describing: error))")
+                    return
+                }
+                //            do {
+                //                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<String, String>
+                //                print(json)
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSDictionary
+                    print(json)
+
+                    if(json["message"] as! String == "1"){ // Signup done
+                        
+                        let userId = json["userid"] as! Int
+                        
+                        UserDefaults.standard.set(userId, forKey: "userid")
+                        
+                        
+                        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreenViewController") as! HomeScreenViewController
+                        
+                        self.navigationController?.pushViewController(homeVC, animated: true)
+                      
+                      //  self.present(homeVC, animated: true)
                         
                     }
-                }else {
+                    else if(json["message"] as! String == "0"){
+                        
+                        self.displayMessage(userMessage: "User is already exist")
+                    }
+                    else{
+                        
+                        self.displayMessage(userMessage: "Could not register. try again later")
+                        
+                    }
+                    
+                } catch{
+                   // SVProgressHUD.dismiss()
                     self.displayMessage(userMessage: "Could not register. try again later")
+                    
                 }
                 
-            } catch{
-                SVProgressHUD.dismiss()
-                self.displayMessage(userMessage: "Could not register. try again later")
-                
             }
+            
+            
+         
     }
         task.resume()
-        
-        
+
+
         
         
         
@@ -132,7 +162,13 @@ class RegistrationViewController: UIViewController {
             }
         }
         alertController.addAction(OKAction)
-        self.present(alertController, animated: true , completion: nil)
+        
+        DispatchQueue.main.async {
+            
+            self.present(alertController, animated: true , completion: nil)
+        }
+        
+        
     }
    
     /*
@@ -146,3 +182,4 @@ class RegistrationViewController: UIViewController {
     */
 
 }
+

@@ -13,12 +13,15 @@ class AppLaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-            
-            let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            self.present(loginVC, animated: true)
-        })
         
+        self.navigationController?.navigationBar.isHidden = true
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+//
+//            let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//            self.present(loginVC, animated: true)
+//        })
+//
         
         
         
@@ -27,6 +30,45 @@ class AppLaunchViewController: UIViewController {
 //        })
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            
+            let userID = UserDefaults.standard.value(forKey: "userid")
+            
+            if(userID != nil){ // Already logged in
+                
+                let homeScreenViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreenViewController") as! HomeScreenViewController
+                self.navigationController?.pushViewController(homeScreenViewController, animated: true)
+            }
+            else{
+                
+                let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.navigationController?.pushViewController(loginVC, animated: true)
+            }
+            
+
+        })
+        
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

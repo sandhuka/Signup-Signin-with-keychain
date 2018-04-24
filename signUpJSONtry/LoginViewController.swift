@@ -18,8 +18,21 @@ class LoginViewController: UIViewController {
         loginScreenLabel.layer.masksToBounds = true
         loginScreenLabel.layer.cornerRadius = 7
         // Do any additional setup after loading the view.
+        
+        
+        setupNavigationBar()
     }
 
+    //MARK:- Setup navigation bar
+    func setupNavigationBar() {
+        
+        self.navigationItem.title = "Login"
+        
+        self.navigationItem.hidesBackButton = true
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -32,7 +45,7 @@ class LoginViewController: UIViewController {
     }
     @IBAction func signUpButtonPressed(_ sender: Any) {
         let registrationVC = self.storyboard?.instantiateViewController(withIdentifier: "RegistrationViewController") as! RegistrationViewController
-        self.present(registrationVC, animated: true)
+        self.navigationController?.pushViewController(registrationVC, animated: true)
     }
     /*
     // MARK: - Navigation

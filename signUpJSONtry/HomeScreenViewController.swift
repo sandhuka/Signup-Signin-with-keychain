@@ -15,6 +15,9 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        
+        setupNavigationBar()
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,7 +25,53 @@ class HomeScreenViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func logoutButtonPressed(_ sender: Any) {
+    
+    func setupNavigationBar(){
+    
+        //Set navigation title
+        self.navigationItem.title = "Home Screen"
+        
+        // Hide back button
+        self.navigationItem.hidesBackButton = true
+        
+        //Add right bar button
+        
+        let btnLogout = UIButton.init(frame: CGRect(x: 0, y:0, width: 40, height: 40))
+        
+        btnLogout.setTitle("Logout", for: .normal)
+        btnLogout.setTitleColor(.red, for: .normal)
+        
+        
+        btnLogout.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
+        
+        let brBtnLogout  = UIBarButtonItem.init(customView: btnLogout)
+        
+        self.navigationItem.rightBarButtonItem = brBtnLogout
+    
+    }
+    
+    //MARK:- Logout button
+    @objc func logoutButtonPressed(_ sender: Any) {
+        
+        UserDefaults.standard.set(nil, forKey: "userid")
+        
+        
+        //Move to splash screen
+        moveToSplashScreen()
+        
+    }
+    
+
+    //MARK:- Move to splash screen
+    func moveToSplashScreen() {
+     
+        for controller in self.navigationController!.viewControllers as Array {
+            if controller.isKind(of: AppLaunchViewController.self) {
+                self.navigationController!.popToViewController(controller, animated: true)
+                break
+            }
+        }
+        
     }
     
     /*
