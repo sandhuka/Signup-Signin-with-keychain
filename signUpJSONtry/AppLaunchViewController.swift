@@ -12,7 +12,7 @@ class AppLaunchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboard()
         
         self.navigationController?.navigationBar.isHidden = true
         
@@ -42,7 +42,7 @@ class AppLaunchViewController: UIViewController {
         super.viewDidAppear(animated)
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             
             let userID = UserDefaults.standard.value(forKey: "userid")
             
@@ -74,6 +74,23 @@ class AppLaunchViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+    extension UIViewController
+    {
+        func hideKeyboard()
+        {
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+                target: self,
+                action: #selector(UIViewController.dismissKeyboard))
+            
+            view.addGestureRecognizer(tap)
+        }
+        
+        @objc func dismissKeyboard()
+        {
+            view.endEditing(true)
+        }
+    }
     
 
     /*
@@ -86,4 +103,4 @@ class AppLaunchViewController: UIViewController {
     }
     */
 
-}
+

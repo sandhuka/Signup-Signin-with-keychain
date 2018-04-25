@@ -12,7 +12,7 @@ import SVProgressHUD
 
 class RegistrationViewController: UIViewController {
 
-    @IBOutlet weak var registrationScreenLabel: UILabel!
+   
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
@@ -21,8 +21,7 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var passwordCheckTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        registrationScreenLabel.layer.masksToBounds = true
-        registrationScreenLabel.layer.cornerRadius = 7
+ self.hideKeyboard()
         // Do any additional setup after loading the view.
         
         setupNavigationBar()
@@ -100,7 +99,7 @@ class RegistrationViewController: UIViewController {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSDictionary
                     print(json)
 
-                    if(json["message"] as! String == "1"){ // Signup done
+                    if(json["code"] as! String == "1"){ // Signup done
                         
                         let userId = json["userid"] as! Int
                         
@@ -114,7 +113,7 @@ class RegistrationViewController: UIViewController {
                       //  self.present(homeVC, animated: true)
                         
                     }
-                    else if(json["message"] as! String == "0"){
+                    else if(json["code"] as! String == "0"){
                         
                         self.displayMessage(userMessage: "User is already exist")
                     }
