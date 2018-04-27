@@ -8,11 +8,11 @@
 
 import UIKit
 import SVProgressHUD
-
+import GoogleSignIn
 
 class RegistrationViewController: UIViewController {
 
-   
+    //MARK:- declaration & outlets
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
@@ -21,17 +21,16 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var passwordCheckTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
- self.hideKeyboard()
+        self.hideKeyboard()
         // Do any additional setup after loading the view.
         
         setupNavigationBar()
     }
 
     
-    //MARK:- Setup navigation bar
+    //MARK:- Setup navigation bar and navigation title
     func setupNavigationBar() {
-        
-        self.navigationItem.title = "Registration"
+    self.navigationItem.title = "Registration"
         
       //  self.navigationItem.hidesBackButton = true
         
@@ -44,8 +43,33 @@ class RegistrationViewController: UIViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
+       // dismiss the registration screen and send to last screen which in this case is login view controller
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    //MARK:- Signup with Google
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error{
+            print("\(error.localizedDescription)")
+        }else{
+            print(user.profile.email)
+            print(user.userID)
+            print(user.profile.familyName)
+            print(user.profile.givenName)
+            print(user.authentication.idToken)
+            
+            // call performJSOn method and pass postPARAM parameters in form of dictionary filled with  detail from google
+            performJSON(postParam : ["firstname": user.profile.givenName, "lastname": user.profile.familyName, "emailid": user.profile.email, "googleId": user.userID, "type": "google", "tokeid":user.authentication.idToken])
+            
+            // signout of google after taing the parameters
+            GIDSignIn.sharedInstance().signOut()
+            
+
+        }
+    }
+    //MARK:- sign up button pressed
     @IBAction func SignUpAcceptTermsButtonPressed(_ sender: Any) {
         
         if (firstNameTextField.text?.isEmpty)! ||
@@ -64,80 +88,9 @@ class RegistrationViewController: UIViewController {
             displayMessage(userMessage: "Passwords should match")
             return
         }
-        SVProgressHUD.show()
-
-        let myURL = URL(string: "http://192.168.7.92:8080/signup")
-        var request = URLRequest(url: myURL!)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "content-type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-
-        let postParam = ["firstname": firstNameTextField.text!, "lastname": lastNameTextField.text!, "emailid": emailIdTextField.text!, "password": passwordTextField.text!, "phoneno": phoneNumberTextField.text!] as [String: String]
-
-        do{
-            request.httpBody = try JSONSerialization.data(withJSONObject: postParam, options: .prettyPrinted)
-        } catch let error{
-            print(error.localizedDescription)
-            displayMessage(userMessage: "Something went wrong")
-            return
-        }
-        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
-
-            
-            DispatchQueue.main.async {
-                
-                SVProgressHUD.dismiss()
-                if error != nil {
-                    self.displayMessage(userMessage: "could not perform request. Please try later")
-                    print("error = \(String(describing: error))")
-                    return
-                }
-                //            do {
-                //                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<String, String>
-                //                print(json)
-                do{
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSDictionary
-                    print(json)
-
-                    if(json["code"] as! String == "1"){ // Signup done
-                        
-                        let userId = json["userid"] as! Int
-                        
-                        UserDefaults.standard.set(userId, forKey: "userid")
-                        
-                        
-                        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreenViewController") as! HomeScreenViewController
-                        
-                        self.navigationController?.pushViewController(homeVC, animated: true)
-                      
-                      //  self.present(homeVC, animated: true)
-                        
-                    }
-                    else if(json["code"] as! String == "0"){
-                        
-                        self.displayMessage(userMessage: "User is already exist")
-                    }
-                    else{
-                        
-                        self.displayMessage(userMessage: "Could not register. try again later")
-                        
-                    }
-                    
-                } catch{
-                   // SVProgressHUD.dismiss()
-                    self.displayMessage(userMessage: "Could not register. try again later")
-                    
-                }
-                
-            }
-            
-            
-         
-    }
-        task.resume()
-
-
-        
+       
+// call performJSOn method and pass postPARAM parameters in form of dictionary filled manually
+        performJSON(postParam : ["firstname": firstNameTextField.text!, "lastname": lastNameTextField.text!, "emailid": emailIdTextField.text!, "password": passwordTextField.text!, "phoneno": phoneNumberTextField.text!, "type": "manual"])
         
         
         
@@ -148,6 +101,10 @@ class RegistrationViewController: UIViewController {
    
     
     @IBAction func SignUpWithGoogleButtonPressed(_ sender: Any) {
+        
+        GIDSignIn.sharedInstance().signIn()
+        
+        
     }
     
     
@@ -169,6 +126,80 @@ class RegistrationViewController: UIViewController {
         
         
     }
+    
+    func performJSON(postParam: NSDictionary){
+        SVProgressHUD.show()
+        
+        let myURL = URL(string: "http://192.168.7.92:8080/signup")
+        var request = URLRequest(url: myURL!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "content-type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        
+        
+        do{
+            request.httpBody = try JSONSerialization.data(withJSONObject: postParam, options: .prettyPrinted)
+        } catch let error{
+            print(error.localizedDescription)
+            displayMessage(userMessage: "Something went wrong")
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            
+            
+            DispatchQueue.main.async {
+                
+                SVProgressHUD.dismiss()
+                if error != nil {
+                    self.displayMessage(userMessage: "could not perform request. Please try later")
+                    print("error = \(String(describing: error))")
+                    return
+                }
+             do{
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSDictionary
+                    print(json)
+                    
+                    if(json["messageCode"] as! Int == 1){ // Signup done
+                        
+                        let userId = json["userid"] as! Int
+                        
+                        UserDefaults.standard.set(userId, forKey: "userid")
+                        
+                        
+                        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreenViewController") as! HomeScreenViewController
+                        
+                        self.navigationController?.pushViewController(homeVC, animated: true)
+                        
+                        //  self.present(homeVC, animated: true)
+                        
+                    }
+                    else if(json["messageCode"] as! Int == 0){   // user already exists
+                        
+                        self.displayMessage(userMessage: "User is already exist")
+                    }
+                    else{
+                        
+                        self.displayMessage(userMessage: "Could not register. try again later")
+                        
+                    }
+                    
+                } catch{
+                    // SVProgressHUD.dismiss()
+                    self.displayMessage(userMessage: "Could not register. try again later")
+                    
+                }
+                
+            }
+            
+            
+            
+        }
+        task.resume()
+
+    }
+    
+    
    
     /*
     // MARK: - Navigation

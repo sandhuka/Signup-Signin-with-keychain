@@ -42,7 +42,7 @@ class AppLaunchViewController: UIViewController {
         super.viewDidAppear(animated)
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
             
             let userID = UserDefaults.standard.value(forKey: "userid")
             
