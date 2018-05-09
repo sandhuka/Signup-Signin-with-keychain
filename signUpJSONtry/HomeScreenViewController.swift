@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeScreenViewController: UIViewController {
+class HomeScreenViewController: BaseViewController {
 
     @IBOutlet weak var nameDisplayLabel: UILabel!
     override func viewDidLoad() {
@@ -18,6 +18,7 @@ class HomeScreenViewController: UIViewController {
         
         
         setupNavigationBar()
+        addSlideMenuButton()
     }
 
     override func didReceiveMemoryWarning() {

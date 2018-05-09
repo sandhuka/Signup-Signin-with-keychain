@@ -135,14 +135,16 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
                     // Json serialization to change format of data from JSON file to dictionary
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSDictionary
                     //print(json)
-                    if (json["messageCode"] as! String == "1"){
+                    if (json["messageCode"] as! Int == 1){
                         let userId = json["userid"] as! Int
                         UserDefaults.standard.set(userId, forKey: "userid")
                         print(userId)
                         let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreenViewController") as! HomeScreenViewController
                         self.navigationController?.pushViewController(homeViewController, animated: true)
                         
-                    } else if (json["messageCode"] as! String == "0"){
+                    } else if (json["messageCode"] as! Int == 0){
+//                        let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreenViewController") as! HomeScreenViewController
+//                        self.navigationController?.pushViewController(homeViewController, animated: true)
                         self.displayMessage(userMessage: "Login not successful")
                       }
                     
